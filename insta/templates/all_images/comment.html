@@ -1,37 +1,70 @@
-{%extends "all_images/base.html"%} {% load bootstrap3 %} {%load static%} {% load staticfiles %} {% block content %}
+{%extends "registration/base.html"%}
+{% load bootstrap3 %}<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon.png">
+        {% if title %}
+        <title>Awards | {{title}}</title>
+        {% else %}
+          <title> Awards </title>
+        {% endif %}
+      
+        {% block styles %}
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+        {% endblock %}
+      
+      </head>{%load static%} {% load staticfiles %} {% block content %}
 
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<div class="container" >
+    <div class="row">
+  
+      <div class="col-md-4"> </div>
+  
+      <div class="col-md-6">
+        <!-- Login form  -->
+          <div class="row">
+              <div class="col-md-12" style="box-shadow: 2px 4px 12px 2px #8f8f8f;
+              margin-top: 5rem;
+              padding-top: 1rem;
+              padding-bottom: 1rem;
+            border-radius: 0.5rem;
+              background: #fff;
+              font-family: 'Mukta';">
+                  <h2 style="display: flex;
+                  justify-content: center;
+                  font-family: 'Mukta';">Add a Comment</h2>
+                  <hr>
+                  <form action="{%url 'comment' image_id%}" method="post">
+                    {% csrf_token %} {% bootstrap_form form%}
+                    <br>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Add">
+                    </div>
+                    <p>Are you lost? <a href="/">Go back home</a></p>
+                      
+                      <input type="hidden" name="next" value="{{next}}">
 
-  <title>Edit Your Profile Information</title>
-  {{form.media}}
+                  </form>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-3"> </div>
+    </div>
+  </div>
 
-{% block styles %} {% bootstrap_css %}
-  <link rel="stylesheet" href="{% static 'css/news.css' %}"> {% endblock %}
+    {% block scripts %}
 
-</head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% bootstrap_javascript %} {% endblock %}
 
-<body>
-<div class="container" style="background-color:#fff;">
-
-     <div class="row">
-
-
-  <form  action="{%url 'comment' image_id%}" method="post" enctype="multipart/form-data">
-    {%csrf_token%}
-
-    {% bootstrap_form form%}
-    <input id="id_myfield" type="submit" class="btn btn-success btn-lg" value="Post">
-  </form>
-
-   {% block scripts %}
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  {% bootstrap_javascript %} {% endblock %}
-
-
-     </div>
-</div>
 {% endblock %}

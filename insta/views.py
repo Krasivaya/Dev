@@ -6,7 +6,6 @@ from .forms import NewImageForm, UpdatebioForm,CommentForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-@login_required(login_url='/accounts/login/')
 def home(request):
     images = Image.objects.order_by('pub_date').reverse().all()
     comments = Comments.objects.all()
@@ -23,6 +22,7 @@ def search_results(request):
         message = "You haven't searched for any term"
         return render(request, 'all_images/search.html', {"message":message})
 
+# @login_required(login_url='/accounts/login/')
 def image(request,image_id):
     try:
         image = Image.objects.get(id = image_id)
@@ -117,6 +117,7 @@ def comment(request,image_id):
     return render(request,'all_images/comment.html',{'form':form,'image_id':image_id})
     
 
+@login_required(login_url='/accounts/login/')
 def comment_show(request,image_id):
     try:
         comment =Comment.objects.get(id =image.id)

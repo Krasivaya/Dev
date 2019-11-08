@@ -1,88 +1,69 @@
 {%extends "registration/base.html"%}
-{% load bootstrap3 %}
+{% load bootstrap3 %}<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon.png">
+        {% if title %}
+        <title>Awards | {{title}}</title>
+        {% else %}
+          <title> Awards </title>
+        {% endif %}
+      
+        {% block styles %}
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+        {% endblock %}
+      
+      </head>
 {% block content %}
-<div class="container">
-  <div style="widows:108%;display:flex;justify-content: center;margin-top: 2%;">
-     
+<div class="container" >
+        <div class="row">
       
-      <div class="loginimage">
-          <img src="http://www.soulmkt.com.br/wp-content/uploads/2018/06/como-postar-no-instagram-350x350.jpg" alt="instagram login phone ">
-      </div>
+          <div class="col-md-3"> </div>
       
-      <!-- Output to Display error in login -->
-      <div class="loginform">
-          {% if form.errors %}
-          <p > Password or Username is incorrect </p>
-          {% endif %}
-         
-
-
-          <div  class="panel panel-default">
-
- 
-              
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_5CAg9Zl918rDSOh5t4kCjcIO0i68Fq_-7eYIW02Gz1G8u1q2" alt="signuplogo " alt="signuplogo " style="width:250px; height:80px;margin: 5px auto; display: block;">
-              
-
-              <div class="panel-body">
-
-                  <form action="/accounts/login/" method="post">
-                      {% csrf_token %} {% bootstrap_form form%}
-
-                      <div class="form-group">
-                          <input type="submit" class="btn btn-primary btn-lg btn-block" value="Login">
-                      </div>
-
-                      <div class="col-xs-10"></div>
-                      <h2 class="text-center">
-                          <small>OR</small>
-                      </h2>
-                      <div class="col-xs-2"></div>
-
- 
-                      <div class="panel-heading">
-                          <p class="_g9ean pull-left">Don't have an account?</p>
-                          <a href="/accounts/register/" class="btn btn-primary btn-sm pull-right">Sign Up</a>
-                      </div>
-                      
-                      <input type="hidden" name="next" value="{{next}}">
-
-                  </form>
-
-                  
+          <div class="col-md-6 ">
+            <!-- Login form  -->
+              <div class="row">
+                  <div class="col-md-12" style="box-shadow: 2px 4px 12px 2px #8f8f8f;
+                  margin-top: 5rem;
+                  padding-top: 1rem;
+                  padding-bottom: 1rem;
+                border-radius: 0.5rem;
+              background: #fff;
+                  font-family: 'Mukta';">
+                      <h3 style="display: flex;
+                      justify-content: center;
+                      font-family: 'Mukta';">Log in</h3>
+                      <h5>Fill in the form to log in</h5>
+                      <hr>
+                      <form action="/accounts/login/" method="post">
+                        {% csrf_token %} {% bootstrap_form form%}
+                        <br>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary btn-lg btn-block" value="Login">
+                        </div>
+                        <p>New User?<a href="/accounts/register/"> Sign up here</a></p>
+                        <p>Are you lost? <a href="/">Go back home</a></p>
+                          
+                          <input type="hidden" name="next" value="{{next}}">
+    
+                      </form>
+                  </div>
               </div>
-
-              
-
           </div>
-       
-          <div class="login-playstorebtn" style="display:flex">
-          
-          
-              <div class="googlebtn">
-          
-                  <a href="https://play.google.com/store/search?q=instagram"><img src="http://coinn.com.br/wp-content/uploads/2019/09/Captura-de-Tela-2019-09-13-a%CC%80s-18.38.59.png" style="width:100px; height:40px "></a>
-          
-              </div>
-          
-              <div class="applebtn">
-          
-                  <a href="https://www.apple.com/us/search/instagram?src=itunes_serp"><img src="https://business.travelstore.com/sites/all/themes/travelstore/img/appstorelogo.png"  alt="signuplogo " style="width:100px; height:40px "></a>
-          
-              </div>
-          
-          </div>
-
-
+          <div class="col-md-3"> </div>
+        </div>
       </div>
 
-
-  </div>
-
-         
-</div>
-
-
-
+      
 {% endblock %}
 
+      

@@ -4,15 +4,19 @@
 <html>
 <head>
   <meta charset="utf-8">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon.png">
   {% if title %}
-  <title>Instagram</title>
+  <title>DEV | {{title}}</title>
   {% else %}
-    <title> Instagram </title>
+    <title> DEV </title>
   {% endif %}
 
   {% block styles %}
     {% bootstrap_css %}
+  <link rel="stylesheet" href="../../../static/css/profile.css">
     <link rel="stylesheet" href="{% static 'css/basenews.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   {% endblock %}

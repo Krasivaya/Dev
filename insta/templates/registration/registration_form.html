@@ -1,39 +1,67 @@
 {%extends "registration/base.html"%} {% load bootstrap3 %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon.png">
+    {% if title %}
+    <title>Awards | {{title}}</title>
+    {% else %}
+      <title> Awards </title>
+    {% endif %}
+  
+    {% block styles %}
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+    {% endblock %}
+  
+  </head>
 {% block content %}
-<div class="container">
-  <div class="row">
-    <!-- Empty div -->
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-      {% if form.errors %}
-        <p> Some Information Might be Incorrect </p>
-      {% endif %}
-      <div class="panel panel-default">
 
-        <div class="panel-heading">
-          <h3 class="text-center">Sign Up</h3>
-        </div>
-        <div class="panel-body">
+<div class="container" >
+    <div class="row">
+  
+      <div class="col-md-3"> </div>
+  
+      <div class="col-md-6">
+        <!-- Login form  -->
+          <div class="row">
+              <div class="col-md-12" style="box-shadow: 2px 4px 12px 2px #8f8f8f;
+              margin-top: 5rem;
+              padding-top: 1rem;
+              padding-bottom: 1rem;
+            border-radius: 0.5rem;
+              background: #fff;
+              font-family: 'Mukta';">
+                  <h3 style="display: flex;
+                  justify-content: center;
+                  font-family: 'Mukta';">Sign up</h3>
+                  <h5>Fill in the form to Sign up</h5>
+                  <hr>
+                  <form action="/accounts/register/" method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <br>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Login">
+                    </div>
+                    <p>Already have an acoount?<a href="/accounts/login/"> Log in here</a></p>
+                    <p>Are you lost? <a href="/">Go back home</a></p>
+                      
+                      <input type="hidden" name="next" value="{{next}}">
 
-          <form  action="/accounts/register/" method="post">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            <div class="form-group">
-              <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
-            </div>
-
-            <input type="hidden" name="next" value="{{next}}">
-
-          </form>
-
-        </div>
-
+                  </form>
+              </div>
+          </div>
       </div>
-
+      <div class="col-md-3"> </div>
     </div>
-    <!-- empty div -->
-    <div class="col-md-4"></div>
   </div>
-</div>
-
 {% endblock %}

@@ -1,39 +1,125 @@
-{%extends 'all_images/base.html'%}
+{%extends 'all_images/base.html'%} {% load bootstrap3 %} {%load static%} {% load staticfiles %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon.png">
+    {% if title %}
+    <title>Awards | {{title}}</title>
+    {% else %}
+      <title> Awards </title>
+    {% endif %}
+  
+    {% block styles %}
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+    {% endblock %}
+  
+  </head>
 {% block content %} 
 {{ block.super}}
 
  <div class="container">
+    <div class="row mt-4">
 
-   <div class="row">
-  
-      <div style="display:flex">
-    <a href="{% url 'comment' image.id%}" ><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQt2iNiNmbM4n2qcUJUOZr2C-dI-EDvT_c3yLH-E6h2jk6wVqoY
-      " style="margin-left:20%;margin-top:0.5%;position:absolute"width=25></a>
+    <!-- Grid row -->
+    <div class="col-md-8">
+      <div class="row">
+        <!-- Grid column -->
+        <div class="col-lg-12">
+          <!-- Card -->
+          <div class="card card-cascade wider reverse">
+            <!-- Card content -->
+            <div class="card-body card-body-cascade ">
+    
+              <!-- Title -->
+              <h2 class="font-weight-bold">{{ image.title }}</h2>
+              <!-- Data -->
+              <p style="opacity: 0.8;" class="">{{ image.content }}<p>
+    
+              <!-- Social shares -->
+              <div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 dark-text"> <small> <span class="mr-1"> By: <a href="{% url 'profile' image.user.id %}" class="mt-4 user">{{image.user.username}}</a></span> </small> </div>
+    
+                <div class="col-lg-6 dark-text"> <small> Date Posted: {{image.pub_date|date:"d - m - Y"}} </small> </div>
+              </div>
+              <!-- {{ratings_start_userrating}} -->
+            </div>
+          </div>
+          <!-- Card -->
+          <div class="card mt-5 pb-2 mb-2">
+            <!-- Card footer -->
+            <div class="card-footer bg-white">
+              <h5 class="pt-2">COMMENTS</h5>
+              <hr>
+              {% for com in comments %}
+              <div class="comment">
+                <div class="ml-2"><strong>{{ com.user.username }}</strong> <span class="text-secondary">{{ com.comment }}</span>
+                </div>
+            </div>
+            {% empty %}
+            <p class="ml-3">No comments here yet</p>
+            {% endfor %}
+            <hr >
+            <button type="submit" class="btn btn-sm btn-outline-primary"><a href="{% url 'comment' image.id%}" >Add Comment</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="col-md-3  userinfo">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card ">
+                    <div class="card-title text-secondary mt-2 mr-2 ml-2 " style="text-align: center">You May Also Like</div>
+                </div>
+                    
+                    <div class="card gedf-card" style="margin:10% 0">
+                    <div class="card-body">
+                            <h5 class="card-title" style="cursor: pointer">Creating a landing page in Django</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Where do we start?</h6>
+                            <p class="card-text">To add a landing page we need to create an "app" which is a Django concept 
+                              for things that are not coupled to your app and can be extracted from it 
+                              (for example authentication which can be used in other applications too).</p>
+                            <span class="badge badge-primary" style="cursor: pointer">Python</span>
+                            <span class="badge badge-secondary" style="cursor: pointer">Django</span>
+                            <span class="badge badge-success" style="cursor: pointer">Virtualenv</span>
+                            <span class="badge badge-info" style="cursor: pointer">Info</span>
+                    </div>
+                    </div>
+                    
+                    <div class="card gedf-card">
+                    <div class="card-body">
+                            <h5 class="card-title" style="cursor: pointer">Why I chose Angular </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">TL;DR</h6>
+                            <p class="card-text">I chose Angular because together we make a great team. It provides 
+                              a fully-fledged platform that takes care of non-functional requirements such as 
+                              compatibility, maintainability and testability while I focus on the user.</p>
+                            <span class="badge badge-success" style="cursor: pointer">Javascript</span>
+                            <span class="badge badge-info style="cursor: pointer"">Angular</span>
+                            <span class="badge badge-primary" style="cursor: pointer">webdev</span>
+                    </div>
+                    </div>
+                    
+            </div>
+            <div class="col-md-2"></div>
+        </div>
 
 
-   </div>
+    </div>
   </div>
-   <h5>posted_by :<a href="{% url 'profile' image.user.id %}">{{image.user.username}}</a></h5>
-   <div class="row">
-     <p>title:{{image.title}}</p>
-   </div>
 
-   <div class="row">
-      {% autoescape on %}
-     <p>content:{{image.content| safe}}</p>
-     {% endautoescape %}
-   </div>
+    </div>
 
-   <div class="row">
-     <p>Posted {{image.pub_date|timesince}} by {{image.profile.user.username}}</p>
-   </div>
-
-   <div class="card"> 
-     <h4>Comments</h4>    
-      {% for com in comments %}
-      <li>{{com.comment}}</li>
-      {% endfor %}
-    </div>    
- </div>
 
  {% endblock %}
